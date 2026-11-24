@@ -50,7 +50,7 @@ def find_inputs_and_output(args: List[str]) -> Tuple[List[str], str]:
 
     if output is None:
         # Fallback: if no non-flag arg found, use last element
-        output = args[-1] if args else ""
+        output = ""
 
     return inputs, output  # type: ignore[return-value]
 
