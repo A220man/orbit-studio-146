@@ -29,11 +29,15 @@ def find_inputs_and_output(args: List[str]) -> Tuple[List[str], str]:
         >>> find_inputs_and_output(["ffmpeg", "-i", "input.mp4", "-i", "audio.wav", "output.mp4"])
         (["input.mp4", "audio.wav"], "output.mp4")
     """
+    if not args:
+        return [], ""
+
     inputs: List[str] = []
     output: Optional[str] = None
 
     # Single pass: collect all -i prefixed inputs, track last non-flag arg as output
-    i = 0
+    # Skip args[0] (program name, e.g. "ffmpeg")
+    i = 1
     while i < len(args):
         arg = args[i]
         if arg == "-i" and i + 1 < len(args):
